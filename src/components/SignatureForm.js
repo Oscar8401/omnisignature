@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Panel,
   FormGroup,
   FormControl,
   ControlLabel
@@ -55,6 +56,7 @@ const FieldGroup = (props) => {
 const SignatureForm = (state) => {
 
   return (
+    <Panel bsStyle="primary" header="Enter your details and we will create your signature" style={{height: '540px'}}>
     <form>
       <Field name="fullName"
         type="text"
@@ -88,6 +90,7 @@ const SignatureForm = (state) => {
         label="Mobile Phone"
         component={ FieldGroup } />
     </form>
+    </Panel>
     );
 };
 

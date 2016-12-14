@@ -13,9 +13,6 @@ const Header = (state) => (
     <Col>
     <h2 className={ 'text-center' }>Email Signature Creator</h2>
     </Col>
-    <Col>
-    <h4 className={ 'text-center' }>Enter your details and we will create your signature</h4>
-    </Col>
   </Row>
 );
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import Frame from 'react-frame-component';
+import {Panel} from 'react-bootstrap';
 
 import Logo from '../../public/logo.jpg';
 
@@ -27,8 +28,7 @@ const SignaturePreview = ({formValues}) => {
   } = formValues;
 
   return (
-    <div>
-      <h2>Signature</h2>
+    <Panel bsStyle="primary" header="Signature" style={{height: '540px'}}>
       <div style={ { width: "100%" } }>
         <Frame style={ { width: "100%", height: 280 } }>
           <div style={ { fontSize: 'small' } }>
@@ -66,7 +66,7 @@ const SignaturePreview = ({formValues}) => {
           </div>
         </Frame>
       </div>
-    </div>
+    </Panel>
     );
 };
 

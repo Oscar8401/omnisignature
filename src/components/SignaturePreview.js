@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import Frame from 'react-frame-component';
-import {Panel, Button} from 'react-bootstrap';
+import {Panel} from 'react-bootstrap';
 import ClipboardButton from 'react-clipboard.js';
-import ReactDOMServer from 'react-dom/server'
 
 import Logo from '../../public/logo.jpg';
 
@@ -21,7 +19,7 @@ const Clipboard = ({formValues}) => {
 
     return (
         <div>
-        <ClipboardButton component="a" button-class="btn" button-style={{color: 'white'}} data-clipboard-target='#copy-me'>
+        <ClipboardButton component="a" button-style={{color: 'white'}} data-clipboard-target='#copy-me'>
             Copy
         </ClipboardButton>
         </div>

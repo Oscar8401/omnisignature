@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import Frame from 'react-frame-component';
-import {Panel} from 'react-bootstrap';
+import {Panel, Button} from 'react-bootstrap';
+import ClipboardButton from 'react-clipboard.js';
+import ReactDOMServer from 'react-dom/server'
 
 import Logo from '../../public/logo.jpg';
 
@@ -15,8 +17,18 @@ const Address = (lines) => {
   return  lines.split('|').map((line) => (<div key={line}>{line}</div>))
 };
 
+const Clipboard = ({formValues}) => {
 
-const SignaturePreview = ({formValues}) => {
+    return (
+        <div>
+        <ClipboardButton component="a" button-class="btn" button-style={{color: 'white'}} data-clipboard-target='#copy-me'>
+            Copy
+        </ClipboardButton>
+        </div>
+    )
+}
+
+const Signature = ({formValues}) => {
 
   const {
     fullName,
@@ -27,10 +39,7 @@ const SignaturePreview = ({formValues}) => {
     location
   } = formValues;
 
-  return (
-    <Panel bsStyle="primary" header="Signature" style={{height: '540px'}}>
-      <div style={ { width: "100%" } }>
-        <Frame style={ { width: "100%", height: 280 } }>
+    return (
           <div style={ { fontSize: 'small' } }>
             <div>
               <b>{ fullName }</b>
@@ -64,11 +73,21 @@ const SignaturePreview = ({formValues}) => {
               </div>
             </div>
           </div>
-        </Frame>
-      </div>
+        );
+}
+
+const SignaturePreview = (state) => {
+
+  return (
+      <Panel bsStyle="primary" header={<Clipboard formValues={state.formValues}/>} style={{height: '540px'}}>
+        
+        <div id='copy-me' >
+            <Signature {...state} />
+        </div>
     </Panel>
     );
 };
+
 
 const mapStateToProps = (state) => {
   return {

@@ -108,15 +108,15 @@ const initialValues = {
 };
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, {location}) => {
   return {
-    formValues: getFormValues('userForm')(state)
+    formValues: getFormValues('userForm')(state),
+    initialValues: Object.assign({}, initialValues, location.query)
   };
 };
 
 const SignatureForm_ = reduxForm({
   form: 'userForm',
-  initialValues: initialValues,
   enableReinitialize: true
 })(SignatureForm);
 

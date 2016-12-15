@@ -12,19 +12,29 @@ const keyStyle = {
   width: '60px'
 };
 
-const Address = (lines) => {
-  return lines.split('|').map((line) => (<div key={ line }>
-                                           { line }
-                                         </div>))
+const SplitAddressLines = (lines) => {
+  return lines.split('|').map((line) => (
+    <div key={ line }>
+      { line }
+    </div>)
+  )
 };
 
-const Clipboard = ({formValues}) => {
-
+const CopyButton = ({formValues}) => {
   return (
     <ClipboardButton component="a" data-clipboard-target='#copy-me'>
       Copy
     </ClipboardButton>
   )
+}
+
+const ShareButton = ({formValues}) => {
+  const shareLink = window.location.origin + '/?' + queryString.stringify(formValues)
+  return (
+    <ClipboardButton component="a" data-clipboard-text={ shareLink }>
+      Share
+    </ClipboardButton>
+    );
 }
 
 const Signature = ({formValues}) => {
@@ -38,6 +48,8 @@ const Signature = ({formValues}) => {
     location
   } = formValues;
 
+  //very simple markup with inline style
+  //for simple email clients
   return (
     <div style={ { fontSize: 'small' } }>
       <div>
@@ -48,7 +60,7 @@ const Signature = ({formValues}) => {
       </div>
       <img src={ Logo } alt='Logo' />
       <div>
-        { Address(location) }
+        { SplitAddressLines(location) }
       </div>
       <br />
       <div>
@@ -75,28 +87,19 @@ const Signature = ({formValues}) => {
     );
 }
 
-const Share = ({formValues}) => {
-  const shareLink = window.location.origin + '/?' + queryString.stringify(formValues)
-  return (
-    <ClipboardButton component="a" data-clipboard-text={ shareLink }>
-      Share
-    </ClipboardButton>
-    );
-}
-
 const SignaturePreview = (state) => {
 
   return (
     <Panel bsStyle="primary" style={ { height: '540px' } }>
-      <span><Share formValues={ state.formValues } /> | </span>
-      <span><Clipboard formValues={ state.formValues }/></span>
+      <span><ShareButton formValues={ state.formValues } /></span>
+      <span style={ { padding: '0 4px' } }>|</span>
+      <span><CopyButton formValues={ state.formValues }/></span>
       <div id='copy-me'>
         <Signature {...state} />
       </div>
     </Panel>
     );
 };
-
 
 const mapStateToProps = (state) => {
   return {

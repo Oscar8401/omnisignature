@@ -88,7 +88,7 @@ const SignaturePreview = (state) => {
 
   return (
     <Panel bsStyle="primary" style={ { height: '540px' } }>
-      <span><Share formValues={ state.formValues } /> |</span>
+      <span><Share formValues={ state.formValues } /> | </span>
       <span><Clipboard formValues={ state.formValues }/></span>
       <div id='copy-me'>
         <Signature {...state} />

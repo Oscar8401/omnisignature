@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import SignatureForm from './SignatureForm';
 import SignaturePreview from './SignaturePreview';
 
-const Generator = (state) => (
+const Signature = (state) => (
   <Row>
     <Col md={ 6 } sm={ 12 }>
     <SignatureForm {...state} />
@@ -15,4 +15,4 @@ const Generator = (state) => (
   </Row>
 );
 
-export default Generator;
+export default Signature;

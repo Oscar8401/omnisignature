@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import {Panel} from 'react-bootstrap';
 import ClipboardButton from 'react-clipboard.js';
+import queryString from 'query-string';
 
 import Logo from '../../public/logo.jpg';
 
@@ -18,11 +19,9 @@ const Address = (lines) => {
 const Clipboard = ({formValues}) => {
 
     return (
-        <div>
-        <ClipboardButton component="a" button-style={{color: 'white'}} data-clipboard-target='#copy-me'>
+        <ClipboardButton component="a" data-clipboard-target='#copy-me'>
             Copy
         </ClipboardButton>
-        </div>
     )
 }
 
@@ -74,11 +73,23 @@ const Signature = ({formValues}) => {
         );
 }
 
+const Share = ({formValues}) => {
+    const shareLink = window.location.origin + '/?' + queryString.stringify(formValues)
+    return (
+        <ClipboardButton component="a" data-clipboard-text={shareLink}>
+            Share
+        </ClipboardButton>
+    );
+}
+
 const SignaturePreview = (state) => {
 
   return (
-      <Panel bsStyle="primary" header={<Clipboard formValues={state.formValues}/>} style={{height: '540px'}}>
-        
+      <Panel bsStyle="primary"  style={{height: '540px'}}>
+
+        <span><Share formValues={state.formValues} /> | </span>
+        <span><Clipboard formValues={state.formValues}/></span>
+
         <div id='copy-me' >
             <Signature {...state} />
         </div>

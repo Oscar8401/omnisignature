@@ -8,7 +8,6 @@ import {
 import { connect } from 'react-redux';
 import { Field, reduxForm, getFormValues } from 'redux-form';
 
-
 const Option = (props) => {
   const {placeholder, type, input, name, label, componentClass, locations} = props;
   const {value, onChange} = input;
@@ -109,9 +108,12 @@ const initialValues = {
 
 
 const mapStateToProps = (state, {location}) => {
+    //remove 'locations' from object
+    //it's an [object Object]; not what we want.
+    const {locations, ...rest} = location.query //eslint-disable-line no-unused-vars
   return {
     formValues: getFormValues('userForm')(state),
-    initialValues: Object.assign({}, initialValues, location.query)
+    initialValues: Object.assign({}, initialValues, rest)
   };
 };
 

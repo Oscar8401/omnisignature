@@ -19,8 +19,7 @@ const App = ({location}) => (
 const Root = () => {
     return (
     <Router history={browserHistory}>
-        <Route path="/" component={App}>
-        </Route>
+        <Route path="/" component={App}> </Route>
     </Router>
     )
 }

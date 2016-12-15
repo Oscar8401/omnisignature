@@ -1,7 +1,6 @@
 {
   "plugins": [
     "esformatter-jsx",
-    "esformatter-semicolons",
     "esformatter-curly"
   ],
   "jsx": {

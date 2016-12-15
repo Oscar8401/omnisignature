@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import SignatureForm from './SignatureForm';
 import SignaturePreview from './SignaturePreview';

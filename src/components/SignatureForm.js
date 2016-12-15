@@ -8,7 +8,9 @@ import {
 import { connect } from 'react-redux';
 import { Field, reduxForm, getFormValues } from 'redux-form';
 
-const Option = (props) => {
+import { initialValues } from '../config.js';
+
+const SelectOption = (props) => {
   const {placeholder, type, input, name, label, componentClass, locations} = props;
   const {value, onChange} = input;
 
@@ -74,7 +76,7 @@ const SignatureForm = (state) => {
           label="Location"
           componentClass="select"
           locations={ state.formValues ? state.formValues.locations : state.initialValues.locations }
-          component={ Option } />
+          component={ SelectOption } />
         <Field name="title"
           type="text"
           placeholder="President"
@@ -95,19 +97,6 @@ const SignatureForm = (state) => {
     );
 };
 
-const initialValues = {
-  fullName: 'Duncan Crocker',
-  title: 'Sales Engineer',
-  email: 'dcrocker@dotlink.com',
-  officePhone: '123 456 7890',
-  mobilePhone: '123 555 7890',
-  locations: {
-    'California': '2161 San Joaquin Hills Road | Newport Beach, CA 92660 ',
-    'Grand Cayman': '3-110 Governors Square|Seven Mile Beach|Grand Cayman, Cayman Islands|1361GT KY1-1108'
-  },
-  location: '2161 San Joaquin Hills Road | Newport Beach, CA 92660 '
-};
-
 
 const mapStateToProps = (state, {location}) => {
   //remove 'locations' from object
@@ -115,16 +104,18 @@ const mapStateToProps = (state, {location}) => {
   const {locations, ...rest} = location.query //eslint-disable-line no-unused-vars
   return {
     formValues: getFormValues('userForm')(state),
+
+    //merge any query params over our defualt initialValues
     initialValues: Object.assign({ }, initialValues, rest)
   };
 };
 
-const SignatureForm_ = reduxForm({
+const ReduxedSignatureForm = reduxForm({
   form: 'userForm',
   enableReinitialize: true
 })(SignatureForm);
 
-const ConnectedSignatureForm = connect(mapStateToProps)(SignatureForm_);
+const ConnectedSignatureForm = connect(mapStateToProps)(ReduxedSignatureForm);
 
 export default ConnectedSignatureForm;
 

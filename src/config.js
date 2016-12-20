@@ -9,4 +9,4 @@ export const initialValues = {
     'Grand Cayman': '3-110 Governors Square|Seven Mile Beach|Grand Cayman, Cayman Islands|1361GT KY1-1108'
   },
   location: '2161 San Joaquin Hills Road | Newport Beach, CA 92660 '
-};
+}
